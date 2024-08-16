@@ -1,0 +1,76 @@
+<div class="swiper mySwiperBrand">
+  <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+      <div class="swiper-slide">
+        <div class="brand-box">
+          <img src="{{ block.settings.image | image_url}}">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mySwiperBrand {
+    padding: 1.5rem;
+  }
+
+
+</style>
+<script>
+    var swiper = new Swiper(".mySwiperBrand", {
+    loop: true,
+    slidesPerView: 2,
+    parallax:true,
+    breakpoints: {  
+     1200: {
+      slidesPerView: 9,
+     
+    },
+    768:{
+        slidesPerView: 3, 
+    }
+  },
+  parallax:true,
+   
+       autoplay: {
+         delay: 5000, 
+                                                                        },
+  });
+</script>
+
+
+{% schema %}
+  {
+    "name": "Brand Slider",
+    "settings": [],
+
+
+    "blocks": [
+      {
+        "name": "Slide",
+        "type": "slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Brand image"
+          }
+        ]
+      }
+    ],
+
+
+    "presets": [
+      {
+        "name": "Brand slider",
+        "category": "custom"
+      }
+    ]
+  }
+{% endschema %}

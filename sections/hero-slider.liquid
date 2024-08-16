@@ -1,0 +1,191 @@
+{{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
+{{ 'swiper-bundle.min.js' | asset_url | script_tag }}
+
+
+{% comment %} <div class="hero-container">
+                                                                    
+                                                                    
+                                                                      <div class="swiper swiper-container">
+                                                                        <div class="swiper-wrapper">
+                                                                          {% for block in section.blocks %}
+                                                                            <div class="swiper-slide">
+                                                                              <div class="hero-box">
+                                                                                <img src="{{ block.settings.image | image_url}}">
+                                                                              </div>
+                                                                            </div>
+                                                                          {% endfor %}
+                                                                        </div>
+                                                                    
+                                                                        <div class="swiper-button-next"></div>
+                                                                        <div class="swiper-button-prev"></div>
+                                                                    
+                                                                    
+                                                                      </div>
+</div> {% endcomment %}
+
+
+<div class="swiper mySwiper">
+  <div class="swiper-wrapper">
+
+    {% for block in section.blocks %}
+      <div class="swiper-slide">
+        <div class="hero-box">
+          <img src="{{ block.settings.image | image_url}}">
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+
+
+<script>
+  var swiper = new Swiper(".mySwiper", {
+    loop: true,
+    slidesPerView: 2,
+    breakpoints: {  
+    640: {
+      slidesPerView: 2,
+     },
+     200: {
+      slidesPerView: 1,
+     
+    },
+  },
+  parallax:true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+       autoplay: {
+         delay: 2000, 
+                                                                        },
+  });
+</script>
+
+{% comment %} <script>
+                                                                        var mySwiper = new Swiper('.swiper-container', {
+                                                                          direction: 'horizontal',
+                                                                          loop: true,
+                                                                          slidesPerView: 2,
+                                                                          navigation: {
+                                                                              nextEl: ".swiper-button-next",
+                                                                              prevEl: ".swiper-button-prev",
+                                                                            },
+                                                                        
+                                                                        
+                                                                          // autoplay: {
+                                                                          //   delay: 2000, // Delay between slides in milliseconds (3 seconds in this example)
+                                                                          // },
+                                                                        });
+</script> {% endcomment %}
+
+
+{% comment %} <style>
+                                                                  * {
+                                                                    margin: 0;
+                                                                    padding: 0;
+                                                                    box-sizing: border-box;
+                                                                  }
+                                                                
+                                                                  .swiper {
+                                                                    width: 100%;
+                                                                    height: 100%;
+                                                                  }
+                                                                
+                                                                
+                                                                  /* Add some basic styles for the Swiper container */
+                                                                  .hero-container {
+                                                                    position: relative;
+                                                                    height: 80vh;
+                                                                  }
+                                                                
+                                                                
+                                                                  .hero-box img {
+                                                                    object-fit: cover;
+                                                                    width: 100%;
+                                                                  }
+                                                                
+                                                                
+</style> {% endcomment %}
+
+<style>
+
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    background-color: white;
+    background-color: rgba(255, 255, 255, 0.5);
+    right: 10px;
+    padding: 30px;
+    color: #000 !important;
+    fill: black !important;
+    stroke: black !important;
+  }
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white !important;
+    transition: all 0.4s ease-in-out;
+  }
+  .swiper-button-next:hover,
+  .swiper-button-prev:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 20px;
+  }
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+
+{% schema %}
+  {
+    "name": "Hero Slider",
+    "settings": [],
+
+
+    "blocks": [
+      {
+        "name": "Slide",
+        "type": "slide",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Hero image"
+          }
+        ]
+      }
+    ],
+
+
+    "presets": [
+      {
+        "name": "Hero slider",
+        "category": "custom"
+      }
+    ]
+  }
+{% endschema %}

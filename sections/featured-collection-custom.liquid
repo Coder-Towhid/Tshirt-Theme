@@ -1,0 +1,124 @@
+<style>
+  .collection-banner {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .image-wrapper {
+    position: relative;
+    display: inline-block;
+    /* Ensure the wrapper takes the dimensions of the image */
+    overflow: hidden;
+  }
+
+  .image-wrapper img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .image-wrapper::before {
+    content: '';
+    background: rgba(255, 255, 255, 0.4);
+    width: 50%;
+    height: 100%;
+    top: 0;
+    left: -125%;
+    transform: skew(135deg);
+    position: absolute;
+    transition: left 500ms ease-out;
+
+  }
+
+  .link_btn {
+    padding: 17px 0;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 1rem 0;
+    border-radius: 50px;
+    text-align: center;
+    background: white;
+    bottom: 40px;
+    width: 100%;
+    max-width: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: color 500ms ease-out;
+  }
+  .link_btn:hover {
+    color: orange;
+
+  }
+
+
+  .image-wrapper:hover::before {
+    left: 180%;
+  }
+
+  @media screen and (max-width: 640px) {
+    .collection-banner {
+      gap: 1rem;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+  }
+
+</style>
+
+<div class="collection-banner">
+  {% for block in section.blocks %}
+
+    <div class="image-wrapper">
+      <img src="{{ block.settings.image | image_url}}">
+      <div class="link_btn">
+      
+      <a href="{{ block.settings.button_link }}">
+        {{ block.settings.button_name }}</div>
+      </a>
+      
+   
+
+    </div>
+
+  {% endfor %}
+</div>
+{% schema %}
+  {
+    "name": "Collection Banner",
+    "settings": [],
+    "blocks": [
+      {
+        "name": "Image",
+        "type": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "collection image"
+          }, {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link",
+             "default": "/collections/all"
+          }, {
+            "type": "text",
+            "id": "button_name",
+            "label": "Button Name",
+            "default": "Shop now"
+          }
+        ]
+      }
+    ],
+
+
+    "presets": [
+      {
+        "name": "Collection Banner",
+        "category": "custom"
+      }
+    ]
+  }
+{% endschema %}
